@@ -1,0 +1,51 @@
+﻿<div class="shadow3">
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
+    <center><h1 style="font-family: 'Raleway', sans-serif;">SUDOKU PUZZLE <span class="version">{{dash.version}}</h1></center>
+</div>
+<div class="container">
+    <center>
+        <div><h3 style="font-family: 'Raleway', sans-serif;color: #646363">DIFFICULTY</h3></div>
+    </center>
+    <center>
+        <div class="container-fluid p-2">
+            <div class="row">
+                <div class="col-sm-4" ng-repeat="level in dash.Levels">
+                    <div class="card mt-3 shadow">
+                        <div class="card-body">
+                            <center>
+                                <i class="fas fa-medal fa-3x trophy" style="color: #d4af37;"></i>
+                                <i ng-show="level == 'MEDIUM' || level == 'HARD'" class="fas fa-medal fa-3x trophy"></i>
+                                <i ng-show="level == 'HARD'" class="fas fa-medal fa-3x trophy"></i>
+                                <h5 class="mt-2" style="font-family: 'Raleway', sans-serif; color: #646363">{{level}}</h5>
+                                <a href="#!Sudoku/{{level}}" type="button" id="playbtn" class="btn shadow btn-outline-success btn-md"><span><i class="far fa-play-circle"></i><span> Play</a><br>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
+</div>
+<section class="trial-block" id="ContactUs">
+    <div class="height450">
+        <div class="social-overlap process-scetion mt100">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="social-bar">
+                            <div class="social-icons iconpad text-center">
+                                <a href="https://www.facebook.com/shubham.agrawal.568" target="_blank" class="slider-nav-item"><i class="fab fa-facebook"></i></a>
+                                <a href="https://shubhama664@gmail.com" target="_blank" class="slider-nav-item"><i class="fab fa-google-plus"></i></a>
+                                <a href="https://github.com/shubhamsWEB" target="_blank" class="slider-nav-item"><i class="fab fa-github"></i></a>
+                                <a href="http://shubhamsweb.in" target="_blank" class="slider-nav-item"><i class="fas fa-globe"></i></a>
+                                <a href="https://linkedin.com/in/shubhamsweb" target="_blank" class="slider-nav-item"><i class="fab fa-linkedin"></i></a>
+                                <center><a href="http://shubhamsweb.in/" target="_blank" class="intro"><span>V {{dash.version}}</span><br />by Shubham Agrawal &#10084;</a></center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    </div>

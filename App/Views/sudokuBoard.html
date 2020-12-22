@@ -1,0 +1,151 @@
+﻿<div ng-hide="board.won">
+    <div ng-hide="board.gameover">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+            <a class="navbar-brand" href="#!/Dashboard">SUDOKU PUZZLE <span class="version">{{board.version}}</span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown active mt-3">
+                        <button class="nav-link dropdown-toggle btn-success btn-md btn-block btn shadow" style="color: #fff;" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Hint
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <center><h3>Solution</h3></center>
+                            <div class="container-fluid">
+                                <table class="table table-sm table-bordered mt-2">
+                                    <tbody style="text-align:center;">
+                                        <tr ng-repeat="cols in board.Solution">
+                                            <td ng-class="{'board-background': $index <=2 || $index >=6}"><input maxlength="1" size="1" type="text" value="{{cols[board.in]}}" /></td>
+                                            <td ng-class="{'board-background': $index <=2 || $index >=6}"><input maxlength="1" size="1" type="text" value="{{cols[board.in + 1]}}" /></td>
+                                            <td ng-class="{'board-background': $index <=2 || $index >=6}"><input maxlength="1" size="1" type="text" value="{{cols[board.in + 2]}}" /></td>
+                                            <td ng-class="{'board-background': $index >=3 && $index <=5}"><input maxlength="1" size="1" type="text" value="{{cols[board.in + 3]}}" /></td>
+                                            <td ng-class="{'board-background': $index >=3 && $index <=5}"><input maxlength="1" size="1" type="text" value="{{cols[board.in + 4]}}" /></td>
+                                            <td ng-class="{'board-background': $index >=3 && $index <=5}"><input maxlength="1" size="1" type="text" value="{{cols[board.in + 5]}}" /></td>
+                                            <td ng-class="{'board-background': $index <=2 || $index >=6}"><input maxlength="1" size="1" type="text" value="{{cols[board.in + 6]}}" /></td>
+                                            <td ng-class="{'board-background': $index <=2 || $index >=6}"><input maxlength="1" size="1" type="text" value="{{cols[board.in + 7]}}" /></td>
+                                            <td ng-class="{'board-background': $index <=2 || $index >=6}"><input maxlength="1" size="1" type="text" value="{{cols[board.in + 8]}}" /></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <div class="container edit-container text-center mt-2">
+                        <button type="button" ng-click="board.newGame()" class="btn btn-primary btn-md shadow" id="erase">
+                            NEW GAME
+                        </button>
+                        <button class="btn btn-md btn-outline-secondary shadow ml-2" ng-click="board.startstop()" id="start">
+                            Start
+                        </button>
+                        <button type="button" ng-click="board.reset()" class="btn btn-primary btn-md shadow ml-2" id="reset">
+                            RESET GAME
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </nav>
+
+        <center><h1 class="mt-3 heading">PUZZLE</h1></center>
+        <div class="container-fluid padding-lr">
+            <table id="puzzle" class="table table-borderless mt-md-5 mt-4">
+                <tbody class="puzzle-table">
+                    <tr ng-repeat="cols in board.Puzzle">
+                        <td ng-if="cols[board.in] != 0" ng-class="{'board-background': $index <=2 || $index >=6}"><input maxlength="1" size="1" type="text" value="{{cols[board.in]}}" disabled /></td>
+                        <td ng-if="cols[board.in] == 0" ng-class="{'board-background': $index <=2 || $index >=6}"><input maxlength="1" size="1" class="blue-text" ng-click="board.set()" type="text" value="" readonly /></td>
+
+                        <td ng-if="cols[board.in + 1] != 0" ng-class="{'board-background': $index <=2 || $index >=6}"><input maxlength="1" size="1" type="text" value="{{cols[board.in + 1]}}" disabled /></td>
+                        <td ng-if="cols[board.in + 1] == 0" ng-class="{'board-background': $index <=2 || $index >=6}"><input maxlength="1" size="1" class="blue-text" ng-click="board.set()" type="text" value="" readonly /></td>
+
+                        <td ng-if="cols[board.in + 2] != 0" ng-class="{'board-background': $index <=2 || $index >=6}"><input maxlength="1" size="1" type="text" value="{{cols[board.in + 2]}}" disabled /></td>
+                        <td ng-if="cols[board.in + 2] == 0" ng-class="{'board-background': $index <=2 || $index >=6}"><input maxlength="1" size="1" class="blue-text" ng-click="board.set()" type="text" value="" readonly /></td>
+
+                        <td ng-if="cols[board.in + 3] != 0" ng-class="{'board-background': $index >=3 && $index <=5}"><input maxlength="1" size="1" type="text" value="{{cols[board.in + 3]}}" disabled /></td>
+                        <td ng-if="cols[board.in + 3] == 0" ng-class="{'board-background': $index >=3 && $index <=5}"><input maxlength="1" size="1" class="blue-text" ng-click="board.set()" type="text" value="" readonly /></td>
+
+                        <td ng-if="cols[board.in + 4] != 0" ng-class="{'board-background': $index >=3 && $index <=5}"><input maxlength="1" size="1" type="text" value="{{cols[board.in + 4]}}" disabled /></td>
+                        <td ng-if="cols[board.in + 4] == 0" ng-class="{'board-background': $index >=3 && $index <=5}"><input maxlength="1" size="1" class="blue-text" ng-click="board.set()" type="text" value="" readonly /></td>
+
+                        <td ng-if="cols[board.in + 5] != 0" ng-class="{'board-background': $index >=3 && $index <=5}"><input maxlength="1" size="1" type="text" value="{{cols[board.in + 5]}}" disabled /></td>
+                        <td ng-if="cols[board.in + 5] == 0" ng-class="{'board-background': $index >=3 && $index <=5}"><input maxlength="1" size="1" class="blue-text" ng-click="board.set()" type="text" value="" readonly /></td>
+
+                        <td ng-if="cols[board.in + 6] != 0" ng-class="{'board-background': $index <=2 || $index >=6}"><input maxlength="1" size="1" type="text" value="{{cols[board.in + 6]}}" disabled /></td>
+                        <td ng-if="cols[board.in + 6] == 0" ng-class="{'board-background': $index <=2 || $index >=6}"><input maxlength="1" size="1" class="blue-text" ng-click="board.set()" type="text" value="" readonly /></td>
+
+                        <td ng-if="cols[board.in + 7] != 0" ng-class="{'board-background': $index <=2 || $index >=6}"><input maxlength="1" size="1" type="text" value="{{cols[board.in + 7]}}" disabled /></td>
+                        <td ng-if="cols[board.in + 7] == 0" ng-class="{'board-background': $index <=2 || $index >=6}"><input maxlength="1" size="1" class="blue-text" ng-click="board.set()" type="text" value="" readonly /></td>
+
+                        <td ng-if="cols[board.in + 8] != 0" ng-class="{'board-background': $index <=2 || $index >=6}"><input maxlength="1" size="1" type="text" value="{{cols[board.in + 8]}}" disabled /></td>
+                        <td ng-if="cols[board.in + 8] == 0" ng-class="{'board-background': $index <=2 || $index >=6}"><input maxlength="1" size="1" class="blue-text" ng-click="board.set()" type="text" value="" readonly /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <center>
+            <div class="container numbers-container text-center mt-5 mb-4">
+                <button ng-click="board.setVal(1)" type="button" class="btn btn-secondary number-btn btn-nums" value="1">
+                    1
+                </button>
+                <button ng-click="board.setVal(2)" type="button" class="btn btn-secondary number-btn btn-nums" value="2">
+                    2
+                </button>
+                <button ng-click="board.setVal(3)" type="button" class="btn btn-secondary number-btn btn-nums" value="3">
+                    3
+                </button>
+                <button ng-click="board.setVal(4)" type="button" class="btn btn-secondary number-btn btn-nums" value="4">
+                    4
+                </button>
+                <button ng-click="board.setVal(5)" type="button" class="btn btn-secondary number-btn btn-nums" value="5">
+                    5
+                </button>
+                <button ng-click="board.setVal(6)" type="button" class="btn btn-secondary number-btn btn-nums" value="6">
+                    6
+                </button>
+                <button ng-click="board.setVal(7)" type="button" class="btn btn-secondary number-btn btn-nums" value="7">
+                    7
+                </button>
+                <button ng-click="board.setVal(8)" type="button" class="btn btn-secondary number-btn btn-nums" value="8">
+                    8
+                </button>
+                <button ng-click="board.setVal(9)" type="button" class="btn btn-secondary number-btn btn-nums" value="9">
+                    9
+                </button>
+            </div>
+            <div class="stopwatch">
+                <h4>
+                    <span id="hour">00</span> :
+                    <span id="min">00</span> :
+                    <span id="sec">00</span>
+                    <span ng-show="milisec1" id="milisec">00</span>
+                </h4>
+            </div>
+        </center>
+    </div>
+</div>
+<div class="jumbotron bg-danger" ng-show="board.gameover">
+    <div class="gameover-text">
+        <center>
+            <h1 class="display-4 over">GAME OVER</h1>
+            <h6>Want to Continue.?</h6>
+            <button class="btn btn-success btn-lg btn-block shadow" ng-click="board.continue()">NEW GAME</button>
+            <button class="btn btn-danger btn-lg shadow btn-block" ng-click="board.no()">NO</button>
+        </center>
+    </div>
+</div>
+<div ng-show="board.won" style="position: relative">
+<canvas id='canv'></canvas>
+<div id="overlay">
+    <div class="won">
+        <h5></h5>
+    <h1>Congratulations you Won in<br /> <span style="color: #fff;">{{board.hourOut}}:{{board.minOut}}:{{board.secOut}}</span></h1>
+    <center>
+        <button class="btn btn-success btn-lg btn-block shadow" ng-click="board.continue()">NEW GAME</button>
+        <button class="btn btn-danger btn-lg shadow btn-block" ng-click="board.no()">EXIT</button>
+    </center>
+        </div>
+</div>
+</div>
+
